@@ -101,7 +101,7 @@ function authenticate_user($dbconn, $username, $password) {
 		FROM
 		authors
 		WHERE
-		username='".$_POST['username']."'
+		username='".addslashes($_POST['username'])."'
 		AND
 		password='".$_POST['password']."'
 		LIMIT 1";
