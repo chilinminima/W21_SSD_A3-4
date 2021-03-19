@@ -9,6 +9,10 @@
 	$aid = $_GET['aid'];
 	$result=get_article($dbconn, $aid);
 	$row = pg_fetch_array($result, 0); //There should only be one row
+
+	//------------------XXS fixing--------------
+	$row['title'] = htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8');
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -33,6 +37,7 @@
 		<?php echo substr($row['date'], 0, 10)." by ".$row['author'] ?>
 	</p><p>
 		<?php echo $row['content'] ?>
+
 	</p>
       </div><!-- /.blog-post -->
 	<?php include("templates/contentstop.php"); ?>

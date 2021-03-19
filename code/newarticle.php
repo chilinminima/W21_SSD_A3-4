@@ -2,7 +2,9 @@
 <?php include("lib/auth.php") ?>
 <?php
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
-		$author = $_SESSION['id'];	
+		$author = $_SESSION['id'];
+		//------------XXS fixing (senitization)	
+		$_POST['content'] = htmlspecialchars($_POST['content'], ENT_QUOTES, 'UTF-8');
 		add_article($dbconn, $_POST['title'], $_POST['content'], $author);
 		Header ("Location: /");		
 	}
