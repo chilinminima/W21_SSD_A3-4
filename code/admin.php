@@ -10,6 +10,8 @@
 	<?php include("templates/nav.php"); ?>
 	<?php include("templates/contentstart.php"); ?>
 
+	
+
 <h2>Article Management</h2>
 
 <p><button type="button" class="btn btn-primary" aria-label="Left Align" onclick="window.location='/newarticle.php';">
@@ -24,6 +26,11 @@ New Post <span class="fa fa-plus" aria-hidden="true"></span>
 		$result = get_article_list($dbconn);
 		while ($row = pg_fetch_array($result)) {
 	?>
+
+	<?php //senitize the title
+		$row['title'] = htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8');
+	?>
+
 <tr>
   <td><a href='article.php?aid=<?php echo $row['aid'] ?>'><?php echo $row['title'] ?></a></td>
   <td><?php echo $row['author'] ?></td>
