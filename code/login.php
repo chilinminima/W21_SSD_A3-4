@@ -2,6 +2,7 @@
 <?php
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $_POST['password'] = hash('sha256', $_POST['password']);
 	$result = authenticate_user($dbconn, $_POST['username'], $_POST['password']);
 	if (pg_num_rows($result) == 1) {
 		$_SESSION['username'] = $_POST['username'];

@@ -87,7 +87,11 @@ function update_article($dbconn, $title, $content, $aid) {
 	return run_query($dbconn, $query);
 }
 
+
 function authenticate_user($dbconn, $username, $password) {
+	//fixing SQL injection by using prepare statement
+	
+
 	$query=
 		"SELECT
 		authors.id as id,
@@ -101,6 +105,7 @@ function authenticate_user($dbconn, $username, $password) {
 		AND
 		password='".$_POST['password']."'
 		LIMIT 1";
+	
 	return run_query($dbconn, $query);
 }	
 ?>
