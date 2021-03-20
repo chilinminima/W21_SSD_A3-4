@@ -21,7 +21,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && check_csrf()) {
     
 		header("Location: /admin.php");
 
+
 	}	
+
+
+
+		
 
 
     //----log login
