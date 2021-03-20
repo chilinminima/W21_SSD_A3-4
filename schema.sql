@@ -20,13 +20,3 @@ CREATE TABLE articles (
 	PRIMARY KEY (id),
 	FOREIGN KEY (author) REFERENCES authors (id) 
 );
-
-CREATE TABLE logs(
-	id SERIAL, 
-	created_on TIMESTAMPTZ DEFAULT NOW(),
-	logTime TEXT NOT NULL ,
-	ip TEXT NOT NULL,
-	logAction TEXT NOT NULL,
-	logDescribtion TEXT NOT NULL,
-	PRIMARY KEY (id)
-);
