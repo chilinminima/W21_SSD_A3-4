@@ -18,46 +18,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && check_csrf()) {
 		$_SESSION['id'] = pg_fetch_array($result)['id'];
 		//Redirect to admin area
 
-<<<<<<< HEAD
+    //----log login
+    $content = "username: " . $_SESSION['username'] . " log in";
+    //echo $content;
+    addLog($dbconn, "login Successful", $content);
     
 		header("Location: /admin.php");
-
-
-	}	
-
-
-
-		
-
-
-    //----log login
-    $content = "username: " . $_SESSION['username'] . " log in";
-    //echo $content;
-    addLog($dbconn, "login Successful", $content);
-		header("Location: /admin.php");
-=======
-    //----log login
-    $content = "username: " . $_SESSION['username'] . " log in";
-    //echo $content;
-    addLog($dbconn, "login Successful", $content);
-		header("Location: /admin.php");
->>>>>>> parent of d8a969e... Revert "create logs"
 	}else{
 
     //----log failed
     $content = "username: " . $_POST['username'] . "  tries to log in";
     addLog($dbconn, "login Failed", $content);
   }	
-<<<<<<< HEAD
-
-
-
-
-
-=======
 }
->>>>>>> parent of d8a969e... Revert "create logs"
-
 ?>
 <!doctype html>
 <html lang="en">

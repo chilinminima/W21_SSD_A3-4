@@ -13,6 +13,7 @@
 	<meta name="theme-color" content="#fafafa">
 
 	<?php
+	/*
 	//------------------------Add these for CSRF token
     session_start();
     include("config.php");
@@ -39,4 +40,5 @@
         }
         return $token;
     }
+	*/
 ?>
