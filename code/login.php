@@ -17,11 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && check_csrf()) {
 		$_SESSION['authenticated'] = True;
 		$_SESSION['id'] = pg_fetch_array($result)['id'];
 		//Redirect to admin area
-<<<<<<< HEAD
-		header("Location: /admin.php");
-	}	
-}
-=======
 
     
 		header("Location: /admin.php");
@@ -50,7 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && check_csrf()) {
 
 
 
->>>>>>> 608c49c959786bb4b3b0bf6d11fd9c84e793d73c
 
 ?>
 <!doctype html>
