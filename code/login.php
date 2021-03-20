@@ -9,8 +9,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$_SESSION['authenticated'] = True;
 		$_SESSION['id'] = pg_fetch_array($result)['id'];
 		//Redirect to admin area
+
+    //----log login
+    $content = "username: " . $_SESSION['username'] . " log in";
+    //echo $content;
+    addLog($dbconn, "login Successful", $content);
 		header("Location: /admin.php");
-	}	
+	}else{
+
+    //----log failed
+    $content = "username: " . $_POST['username'] . "  tries to log in";
+    addLog($dbconn, "login Failed", $content);
+  }	
 }
 
 ?>

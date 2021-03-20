@@ -27,6 +27,9 @@ if ($userInfo['role'] == "admin"){
     }
 }
 
+//----add activity to log
+$content = "username: " . $_SESSION['username'] . "  delete article. Article title: " . $articleInfo['title'];
+addLog($dbconn, "delete article", $content);
 
 //$result = delete_article($dbconn, $aid);
 #echo "result=".$result."<br>";
