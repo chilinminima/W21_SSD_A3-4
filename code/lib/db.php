@@ -126,4 +126,22 @@ function get_author($dbconn, $authorId){
 		return run_query($dbconn, $query);
 }
 
+//------add log to database
+function addLog($dbconn, $action, $description){
+
+	$ip = $_SERVER['REMOTE_ADDR']; //client IP
+    date_default_timezone_set('UTC');
+    $time = date('y/m/d h:iA', time());
+	//desciption = 'test2';
+	$query="
+		INSERT INTO 
+		logs
+		(logTime, ip, logAction, logDescribtion)
+		VALUES
+		('$time', '$ip', '$action', '$description')";
+		
+		
+		return run_query($dbconn, $query);
+}
+
 ?>
