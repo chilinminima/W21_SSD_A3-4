@@ -19,9 +19,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && check_csrf()) {
 		//Redirect to admin area
     
 		header("Location: /admin.php");
-
-	}	
 }
+		
+
+    //----log login
+    $content = "username: " . $_SESSION['username'] . " log in";
+    //echo $content;
+    addLog($dbconn, "login Successful", $content);
+		header("Location: /admin.php");
+	}else{
+
+    //----log failed
+    $content = "username: " . $_POST['username'] . "  tries to log in";
+    addLog($dbconn, "login Failed", $content);
+  }	
+
+
 
 
 

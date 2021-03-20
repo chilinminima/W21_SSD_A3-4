@@ -6,6 +6,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		//------------XXS fixing (senitization)	
 		$_POST['content'] = htmlspecialchars($_POST['content'], ENT_QUOTES, 'UTF-8');
 		add_article($dbconn, $_POST['title'], $_POST['content'], $author);
+
+		//----add activity to log
+		$content = "username: " . $_SESSION['username'] . "  add article. Article title: " . $_POST['title'];
+		addLog($dbconn, "add article", $content);
+
 		Header ("Location: /");		
 	}
 ?>
