@@ -11,3 +11,32 @@
 	<link rel="stylesheet" href="/static/css/main.css">
 
 	<meta name="theme-color" content="#fafafa">
+
+	<?php
+	//------------------------Add these for CSRF token
+    session_start();
+    include("config.php");
+    include("lib/db.php");
+
+    function check_csrf() {
+        if ($_REQUEST["csrf_token"] !== $_SESSION["csrf_token"]) {
+            // Reset token
+            unset($_SESSION["csrf_token"]);
+            die("CSRF token validation failed");
+        }
+        return true;
+    }
+
+    function generate_csrf_token() {
+        // Check if a token is present for the current session
+        if(!isset($_SESSION["csrf_token"])) {
+            // No token present, generate a new one
+            $token = md5(microtime());
+            $_SESSION["csrf_token"] = $token;
+        } else {
+            // Reuse the token
+            $token = $_SESSION["csrf_token"];
+        }
+        return $token;
+    }
+?>
