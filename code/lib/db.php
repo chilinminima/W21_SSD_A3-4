@@ -47,6 +47,7 @@ function get_article($dbconn, $aid) {
 		articles.aid as aid,
 		articles.title as title,
 		authors.username as author,
+		authors.id as id,
 		articles.stub as stub,
 		articles.content as content
 		FROM 
@@ -107,5 +108,40 @@ function authenticate_user($dbconn, $username, $password) {
 		LIMIT 1";
 	
 	return run_query($dbconn, $query);
-}	
+}
+
+
+//------add statement to get author info
+function get_author($dbconn, $authorId){
+	$query=
+		"SELECT
+		authors.id as id,
+		authors.username as username,
+		authors.role as role
+		FROM
+		authors
+		WHERE
+		id = '$authorId'
+		";
+		return run_query($dbconn, $query);
+}
+
+//------add log to database
+function addLog($dbconn, $action, $description){
+
+	$ip = $_SERVER['REMOTE_ADDR']; //client IP
+    date_default_timezone_set('UTC');
+    $time = date('y/m/d h:iA', time());
+	//desciption = 'test2';
+	$query="
+		INSERT INTO 
+		logs
+		(logTime, ip, logAction, logDescribtion)
+		VALUES
+		('$time', '$ip', '$action', '$description')";
+		
+		
+		return run_query($dbconn, $query);
+}
+
 ?>
