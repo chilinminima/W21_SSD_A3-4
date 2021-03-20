@@ -1,7 +1,15 @@
 <?php include("templates/page_header.php");?>
 <?php
+    function token_generate()
+    {
+        $salt = "hello".date("h:i:s");
+        $token = md5($salt);
+        return $token;
+    }
+    $token = token_generate();
+    $_SESSION["user_token"] = $token;
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && check_csrf()) {
   $_POST['password'] = hash('sha256', $_POST['password']);
 	$result = authenticate_user($dbconn, $_POST['username'], $_POST['password']);
 	if (pg_num_rows($result) == 1) {
@@ -9,9 +17,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$_SESSION['authenticated'] = True;
 		$_SESSION['id'] = pg_fetch_array($result)['id'];
 		//Redirect to admin area
+<<<<<<< HEAD
 		header("Location: /admin.php");
 	}	
 }
+=======
+
+    
+		header("Location: /admin.php");
+
+
+	}	
+
+
+
+		
+
+
+    //----log login
+    $content = "username: " . $_SESSION['username'] . " log in";
+    //echo $content;
+    addLog($dbconn, "login Successful", $content);
+		header("Location: /admin.php");
+	}else{
+
+    //----log failed
+    $content = "username: " . $_POST['username'] . "  tries to log in";
+    addLog($dbconn, "login Failed", $content);
+  }	
+
+
+
+
+
+>>>>>>> 608c49c959786bb4b3b0bf6d11fd9c84e793d73c
 
 ?>
 <!doctype html>
@@ -64,6 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <input type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus name='username'>
       <label for="inputPassword" class="sr-only">Password</label>
       <input type="password" id="inputPassword" class="form-control" placeholder="Password" required name='password'>
+          <input type="hidden" name="user_token" value="<?php echo $token;?>">
       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
 <br>
