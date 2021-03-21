@@ -17,15 +17,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && check_csrf()) {
 		$_SESSION['authenticated'] = True;
 		$_SESSION['id'] = pg_fetch_array($result)['id'];
 		//Redirect to admin area
-    
-		header("Location: /admin.php");
-}
-		
 
     //----log login
     $content = "username: " . $_SESSION['username'] . " log in";
     //echo $content;
     addLog($dbconn, "login Successful", $content);
+    
 		header("Location: /admin.php");
 	}else{
 
@@ -33,12 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && check_csrf()) {
     $content = "username: " . $_POST['username'] . "  tries to log in";
     addLog($dbconn, "login Failed", $content);
   }	
-
-
-
-
-
-
+}
 ?>
 <!doctype html>
 <html lang="en">
